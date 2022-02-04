@@ -14,10 +14,11 @@ from app.models import Shortener, Url
 
 @require_GET
 def home(request, short=""):
-    url_short = Shortener.objects.filter(short_form=short)[0]
-    if url_short:
-        url_long = url_short.url.long_form
-        return redirect(url_long)
+    if short != "":
+        url_short = Shortener.objects.filter(short_form=short)[0]
+        if url_short:
+            url_long = url_short.url.long_form
+            return redirect(url_long)
     return redirect("/shortener")
 
 
